@@ -3,5 +3,8 @@
   "env": {
     "mocha": true,
     "node": true
+  },
+  "rules":{
+    "indent":"off"
   }
 }
