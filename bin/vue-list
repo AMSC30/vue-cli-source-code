@@ -1,40 +1,20 @@
 #!/usr/bin/env node
 
-const logger = require('../lib/logger')
-const request = require('request')
-const chalk = require('chalk')
+const path = require('path')
+const destination = process.cwd()
+const metalsmith = require('metalsmith')(destination)
+const name = 'test-name'
 
-/**
- * Padding.
- */
-
-console.log()
-process.on('exit', () => {
-    console.log()
-})
-
-/**
- * List repos.
- */
-
-request(
-    {
-        url: 'https://api.github.com/users/vuejs-templates/repos',
-        headers: {
-            'User-Agent': 'vue-cli'
+metalsmith
+    .use((files, metalsmith, done) => {
+        console.log(files)
+        console.log(metalsmith.metadata())
+    })
+    .source('lib')
+    .clean(true)
+    .destination(path.resolve(destination, name))
+    .build((err, files) => {
+        if (err) {
+            console.log(err)
         }
-    },
-    (err, res, body) => {
-        if (err) logger.fatal(err)
-        const requestBody = JSON.parse(body)
-        if (Array.isArray(requestBody)) {
-            console.log('  Available official templates:')
-            console.log()
-            requestBody.forEach(repo => {
-                console.log('  ' + chalk.yellow('★') + '  ' + chalk.blue(repo.name) + ' - ' + repo.description)
-            })
-        } else {
-            console.error(requestBody.message)
-        }
-    }
-)
+    })

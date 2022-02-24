@@ -6,8 +6,7 @@
     "bin": {
         "zxx": "bin/vue",
         "zxx-init": "bin/vue-init",
-        "zxx-list": "bin/vue-list",
-        "zxx-test": "bin/vue-test"
+        "zxx-list": "bin/vue-list"
     },
     "repository": {
         "type": "git",
