@@ -1,5 +1,12 @@
-.DS_Store
 node_modules
-test/e2e/mock-template-build
+.DS_Store
+design
 *.log
-dist/
+packages/test
+dist
+temp
+.vuerc
+.version
+.versions
+.changelog
+package-lock.json
